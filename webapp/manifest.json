@@ -1,0 +1,183 @@
+{
+    "_version": "1.37.0",
+    "sap.app": {
+        "id": "moovi.zrxnamandaapp",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:listdetail",
+            "version": "1.9.3",
+            "toolsId": "19e9def6-dfb4-40e1-b3ce-ef6c4c4d974d"
+        },
+        "dataSources": {
+            "mainService": {
+                "uri": "/sap/opu/odata/sap/ZRXNAMANDA_GW_SRV/",
+                "type": "OData",
+                "settings": {
+                    "annotations": [],
+                    "localUri": "localService/metadata.xml",
+                    "odataVersion": "2.0"
+                }
+            }
+        },
+        "crossNavigation": {
+            "inbounds": {
+                "moovi-zrxnamandaapp-inbound": {
+                    "signature": {
+                        "parameters": {},
+                        "additionalParameters": "allowed"
+                    },
+                    "semanticObject": "zrxnamanda_app",
+                    "action": "display",
+                    "title": "{{flpTitle}}",
+                    "subTitle": "{{flpSubtitle}}",
+                    "icon": ""
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.96.6",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "moovi.zrxnamandaapp.i18n.i18n"
+                }
+            },
+            "": {
+                "dataSource": "mainService",
+                "preload": true,
+                "settings": {
+                    "defaultOperationMode": "Server",
+                    "defaultBindingMode": "TwoWay",
+                    "userBatch": true,
+                    "defaultUpdateMethod": "PUT"
+                }
+            },
+            "editCompanyModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "/model/editCompany.json"
+            },
+            "editFlightModel": {
+                "type": "sap.ui.model.json.JSONModel",
+                "uri": "/model/editFlight.json"
+            }
+        },
+        "resources": {
+            "css": [],
+            "fragments": []
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.f.routing.Router",
+                "viewType": "XML",
+                "viewPath": "moovi.zrxnamandaapp.view",
+                "controlId": "layout",
+                "controlAggregation": "beginColumnPages",
+                "bypassed": {
+                    "target": [
+                        "notFound"
+                    ]
+                },
+                "async": true
+            },
+            "routes": [
+                {
+                    "pattern": "",
+                    "name": "list",
+                    "target": "list"
+                },
+                {
+                    "pattern": "ScarrSet/{objectId}",
+                    "name": "object",
+                    "target": [
+                        "list",
+                        "object"
+                    ]
+                },
+                {
+                    "pattern": "SpfliSet/{Carrid}/{Connid}",
+                    "name": "flightDetail",
+                    "target": [
+                        "list",
+                        "flightDetail"
+                    ]
+                }
+            ],
+            "targets": {
+                "list": {
+                    "viewName": "List",
+                    "viewLevel": 1,
+                    "viewId": "list"
+                },
+                "object": {
+                    "viewName": "Detail",
+                    "viewId": "detail",
+                    "viewLevel": 1,
+                    "controlAggregation": "midColumnPages"
+                },
+                "flightDetail": {
+                    "viewName": "FlightDetail",
+                    "viewId": "flightDetail",
+                    "viewLevel": 1,
+                    "controlAggregation": "midColumnPages"
+                },
+                "detailObjectNotFound": {
+                    "viewName": "DetailObjectNotFound",
+                    "viewId": "detailObjectNotFound",
+                    "controlAggregation": "midColumnPages"
+                },
+                "notFound": {
+                    "viewName": "NotFound",
+                    "viewId": "notFound"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "moovi.zrxnamandaapp.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        }
+    }
+}
